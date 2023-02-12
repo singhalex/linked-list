@@ -135,8 +135,30 @@ const linkedListFactory = () => {
     return false;
   };
 
+  // Returns the index of the node containing given value
+  const find = (value) => {
+    // Initialize counting variables
+    let currentNode = head;
+    let index = 1;
+
+    // Checks list for given value
+    while (index < listLength + 1) {
+      if (currentNode.getValue() === value) {
+        // Returns the index if value is found
+        return index;
+      }
+
+      // Move to the next node and increment index counter
+      currentNode = currentNode.getNextNode();
+      index += 1;
+    }
+
+    // Returns null if not found in the list
+    return null;
+  };
+
   return {
-    getHead, getTail, getLength, append, prepend, at, pop, contains,
+    getHead, getTail, getLength, append, prepend, at, pop, contains, find,
   };
 };
 
@@ -157,3 +179,5 @@ testList.pop();
 
 console.log(testList.contains('3rd Node'));
 console.log(testList.getTail().getValue());
+
+console.log(testList.find('2nd Node'));
