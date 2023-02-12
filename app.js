@@ -157,27 +157,28 @@ const linkedListFactory = () => {
     return null;
   };
 
+  // Prints the linked list in the console
+  const toString = () => {
+    // Initialize counting variables
+    let currentNode = head;
+    let counter = 1;
+    // String to print
+    let print = '';
+
+    // Loop through the list and append the value to the message
+    while (counter < listLength + 1) {
+      print += `( ${currentNode.getValue()} ) -> `;
+      counter += 1;
+      currentNode = currentNode.getNextNode();
+    }
+
+    // Adds the final part of the message
+    print += 'null';
+
+    console.log(print);
+  };
+
   return {
-    getHead, getTail, getLength, append, prepend, at, pop, contains, find,
+    getHead, getTail, getLength, append, prepend, at, pop, contains, find, toString,
   };
 };
-
-const testList = linkedListFactory();
-testList.append('3rd Node');
-
-testList.prepend('2nd Node');
-// console.log(testList.getTail().getNextNode());
-// console.log(testList.getHead().getNextNode().getNextNode());
-
-testList.prepend('1st Node');
-// console.log(testList.getHead().getValue());
-// console.log(testList.getTail().getValue());
-// console.log(testList.getTail().getNextNode());
-
-testList.append('4th Node');
-testList.pop();
-
-console.log(testList.contains('3rd Node'));
-console.log(testList.getTail().getValue());
-
-console.log(testList.find('2nd Node'));
