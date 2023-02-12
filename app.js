@@ -44,22 +44,19 @@ const linkedListFactory = () => {
     listLength += 1;
   };
 
+  const prepend = (value) => {
+    const newNode = nodeFactory(value);
+    newNode.setNextNode(head);
+    head = newNode;
+  };
+
   return {
-    append, getLength, getHead, getTail,
+    append, prepend, getLength, getHead, getTail,
   };
 };
 
-const testNode = nodeFactory('ooh yeah');
-console.log(testNode.getValue());
-testNode.setValue('Ooompah');
-console.log(testNode.getValue());
-
 const testList = linkedListFactory();
-console.log(testList);
-console.log(testList.getLength());
-testList.append('hello');
-console.log(testList.getLength());
+testList.prepend('Hello');
 console.log(testList.getHead().getValue());
-console.log(testList.getTail());
-testList.append('I so pale');
+testList.append('Goodbye');
 console.log(testList.getTail().getValue());
