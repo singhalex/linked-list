@@ -89,8 +89,54 @@ const linkedListFactory = () => {
     return currentNode;
   };
 
+  // Method to remove last node in the list
+  const pop = () => {
+    // Creates a blank list if there is only one node
+    if (listLength === 1 || listLength === 0) {
+      head = null;
+      tail = null;
+      return;
+    }
+
+    // Initialize counters
+    let currentNode = head;
+    let counter = 2;
+
+    // Stop at 2nd to last node
+    while (counter < listLength) {
+      currentNode = currentNode.getNextNode();
+      counter += 1;
+    }
+
+    // New node is 2nd to last and points to null
+    tail = currentNode;
+    currentNode.setNextNode(null);
+    // Decrement the list length
+    listLength -= 1;
+  };
+
+  // Search list for given value
+  const contains = (value) => {
+    // Initialize counters
+    let currentNode = head;
+    let counter = 0;
+
+    // Checks each node for the value
+    while (counter !== listLength) {
+      if (currentNode.getValue() === value) {
+        return true;
+      }
+
+      // Move to the next node
+      currentNode = currentNode.getNextNode();
+      counter += 1;
+    }
+    // Return false if value not found
+    return false;
+  };
+
   return {
-    getHead, getTail, getLength, append, prepend, at,
+    getHead, getTail, getLength, append, prepend, at, pop, contains,
   };
 };
 
@@ -106,4 +152,8 @@ testList.prepend('1st Node');
 // console.log(testList.getTail().getValue());
 // console.log(testList.getTail().getNextNode());
 
-console.log(testList.at(2).getValue());
+testList.append('4th Node');
+testList.pop();
+
+console.log(testList.contains('3rd Node'));
+console.log(testList.getTail().getValue());
