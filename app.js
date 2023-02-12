@@ -34,20 +34,36 @@ const linkedListFactory = () => {
   const append = (value) => {
     // Create node with given value
     const newNode = nodeFactory(value);
-    // If first node, will place it at the head
+
+    // If first node, will place it at the head and tail
     if (head === null) {
       head = newNode;
     } else {
-      tail = newNode;
+      tail.setNextNode(newNode);
     }
+    tail = newNode;
+
     // Increase length counter
     listLength += 1;
   };
 
   const prepend = (value) => {
+    // Create new node
     const newNode = nodeFactory(value);
+
+    // New node points to the old head
     newNode.setNextNode(head);
+
+    // New node is set to the head of list
     head = newNode;
+
+    // If first node of list, also makes it the tail
+    if (tail === null) {
+      tail = newNode;
+    }
+
+    // Increase length counter
+    listLength += 1;
   };
 
   return {
@@ -56,7 +72,13 @@ const linkedListFactory = () => {
 };
 
 const testList = linkedListFactory();
-testList.prepend('Hello');
+testList.append('3rd Node');
+
+testList.prepend('2nd Node');
+console.log(testList.getTail().getNextNode());
+console.log(testList.getHead().getNextNode().getNextNode());
+
+testList.prepend('1st Node');
 console.log(testList.getHead().getValue());
-testList.append('Goodbye');
 console.log(testList.getTail().getValue());
+console.log(testList.getTail().getNextNode());
