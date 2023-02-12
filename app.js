@@ -66,8 +66,31 @@ const linkedListFactory = () => {
     listLength += 1;
   };
 
+  // Method to find node at specific index
+  const at = (index) => {
+    if (index > listLength) {
+      return console.error('Sorry, the list is not that long');
+    } if (index === 1) {
+      return head;
+    } if (index === listLength) {
+      return tail;
+    }
+
+    // Tracking variables
+    let counter = 1;
+    let currentNode = head;
+
+    // Loop through the list to find the node
+    while (counter !== index) {
+      counter += 1;
+      currentNode = currentNode.getNextNode();
+    }
+
+    return currentNode;
+  };
+
   return {
-    append, prepend, getLength, getHead, getTail,
+    getHead, getTail, getLength, append, prepend, at,
   };
 };
 
@@ -75,10 +98,12 @@ const testList = linkedListFactory();
 testList.append('3rd Node');
 
 testList.prepend('2nd Node');
-console.log(testList.getTail().getNextNode());
-console.log(testList.getHead().getNextNode().getNextNode());
+// console.log(testList.getTail().getNextNode());
+// console.log(testList.getHead().getNextNode().getNextNode());
 
 testList.prepend('1st Node');
-console.log(testList.getHead().getValue());
-console.log(testList.getTail().getValue());
-console.log(testList.getTail().getNextNode());
+// console.log(testList.getHead().getValue());
+// console.log(testList.getTail().getValue());
+// console.log(testList.getTail().getNextNode());
+
+console.log(testList.at(2).getValue());
