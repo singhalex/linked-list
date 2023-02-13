@@ -178,7 +178,57 @@ const linkedListFactory = () => {
     console.log(print);
   };
 
+  // Method to add node at a specific index
+  const insertAt = (value, index) => {
+    // Run prepend method is adding node to the beginning
+    if (index === 1) {
+      prepend(value);
+      return;
+    }
+
+    // Returns an error if trying to insert at index larger than list size
+    if (index > listLength + 1) {
+      return console.error('List is not that long');
+    }
+
+    // Initialize counting variables
+    const newNode = nodeFactory(value);
+    let counter = 1;
+    let currentNode = head;
+
+    // Loop through list until node before given index
+    while (counter < listLength + 1) {
+      if (counter === index - 1) {
+        // Set new node pointer to node it's replacing
+        newNode.setNextNode(currentNode.getNextNode());
+        // Set previous node to new node
+        currentNode.setNextNode(newNode);
+
+        // Increase list length
+        listLength += 1;
+        return;
+      }
+
+      // Move to current next node in the list
+      currentNode = currentNode.getNextNode();
+      counter += 1;
+    }
+  };
+
   return {
-    getHead, getTail, getLength, append, prepend, at, pop, contains, find, toString,
+    getHead, getTail, getLength, append, prepend, at, pop, contains, find, toString, insertAt,
   };
 };
+
+const list = linkedListFactory();
+list.append('1');
+list.append('2');
+list.append('3');
+list.toString();
+
+list.insertAt('inserted node', 2);
+list.toString();
+
+console.log(list.getLength());
+list.insertAt('new inserted node', 5);
+list.toString();
