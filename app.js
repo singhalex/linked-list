@@ -191,6 +191,11 @@ const linkedListFactory = () => {
       return console.error('List is not that long');
     }
 
+    if (index === listLength + 1) {
+      append(value);
+      return;
+    }
+
     // Initialize counting variables
     const newNode = nodeFactory(value);
     let counter = 1;
@@ -215,8 +220,47 @@ const linkedListFactory = () => {
     }
   };
 
+  const removeAt = (index) => {
+    // if (listLength === 1) {
+    //   head = null;
+    //   listLength = 0;
+    //   return;
+    // }
+
+    // // if (listLength === 2) {
+    // // }
+
+    // let currentNode = head;
+    // let counter = 1;
+
+    // while (index < listLength) {
+    //   if (counter === index - 1) {
+    //     if (currentNode.getNextNode().getNextNode() === null) {
+    //       console.log('its null');
+    //     }
+    //     // currentNode.setNextNode(currentNode.getNextNode().getNextNode());
+    //     listLength -= 1;
+    //     return;
+    //   }
+
+    //   currentNode = currentNode.getNextNode();
+    //   counter += 1;
+    // }
+  };
+
   return {
-    getHead, getTail, getLength, append, prepend, at, pop, contains, find, toString, insertAt,
+    getHead,
+    getTail,
+    getLength,
+    append,
+    prepend,
+    at,
+    pop,
+    contains,
+    find,
+    toString,
+    insertAt,
+    removeAt,
   };
 };
 
@@ -228,7 +272,9 @@ list.toString();
 
 list.insertAt('inserted node', 2);
 list.toString();
+console.log(list.getTail().getValue());
 
 console.log(list.getLength());
 list.insertAt('new inserted node', 5);
 list.toString();
+console.log(list.getTail().getValue());
