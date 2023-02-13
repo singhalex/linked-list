@@ -220,32 +220,48 @@ const linkedListFactory = () => {
     }
   };
 
+  // Method to remove specific node
   const removeAt = (index) => {
-    // if (listLength === 1) {
-    //   head = null;
-    //   listLength = 0;
-    //   return;
-    // }
+    if (index > listLength) {
+      return console.error('List is not that long');
+    }
 
-    // // if (listLength === 2) {
-    // // }
+    // Empty list if only one node long
+    if (listLength === 1) {
+      head = null;
+      tail = null;
+      listLength = 0;
+      return;
+    }
 
-    // let currentNode = head;
-    // let counter = 1;
+    // Use pop method if removing last node
+    if (index === listLength) {
+      pop();
+      return;
+    }
 
-    // while (index < listLength) {
-    //   if (counter === index - 1) {
-    //     if (currentNode.getNextNode().getNextNode() === null) {
-    //       console.log('its null');
-    //     }
-    //     // currentNode.setNextNode(currentNode.getNextNode().getNextNode());
-    //     listLength -= 1;
-    //     return;
-    //   }
+    // Remove head
+    if (index === 1) {
+      head = head.getNextNode();
+      listLength -= 1;
+      return;
+    }
 
-    //   currentNode = currentNode.getNextNode();
-    //   counter += 1;
-    // }
+    // Initialize counting variables
+    let currentNode = head;
+    let counter = 1;
+
+    while (counter < listLength) {
+      if (counter === index - 1) {
+        // Set next node of node before index to skip
+        currentNode.setNextNode(currentNode.getNextNode().getNextNode());
+        listLength -= 1;
+        return;
+      }
+
+      currentNode = currentNode.getNextNode();
+      counter += 1;
+    }
   };
 
   return {
@@ -263,18 +279,3 @@ const linkedListFactory = () => {
     removeAt,
   };
 };
-
-const list = linkedListFactory();
-list.append('1');
-list.append('2');
-list.append('3');
-list.toString();
-
-list.insertAt('inserted node', 2);
-list.toString();
-console.log(list.getTail().getValue());
-
-console.log(list.getLength());
-list.insertAt('new inserted node', 5);
-list.toString();
-console.log(list.getTail().getValue());
