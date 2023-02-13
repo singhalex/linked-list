@@ -16,7 +16,7 @@ and `linkedListFactory`, which keeps track of the nodes and has methods to manip
 - `prepend(value)` adds a new node containing `value` to the start of the list
 - `at(index)` returns the node at the given `index`
 - `pop` removes the last elemenent in the list
-- `contains(value) returns true if the passed in value is in the list, otherwise returns false
+- `contains(value)` returns true if the passed in value is in the list, otherwise returns false
 - `find(value)` returns the index of the node containing value or null if not found
 - `toString` prints a visual map of the list to the console
 - `insertAt(value, index)` inserts a new node with the provided `value` at the given `index`
